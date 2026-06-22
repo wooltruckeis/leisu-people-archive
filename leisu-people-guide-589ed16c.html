@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雷速 · 信息卡片介绍</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fbd9b0 0%, #fbc2a8 30%, #fbe0c5 70%, #f8d5b0 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      padding: 2rem 1.2rem;
+      line-height: 1.6;
+      color: #2e241e;
+    }
+
+    .page {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .card {
+      background: rgba(255, 248, 240, 0.85);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 36px;
+      padding: 2.2rem 2.8rem;
+      box-shadow: 0 18px 35px rgba(150, 80, 40, 0.12), 0 4px 10px rgba(180, 100, 60, 0.08);
+      border: 1px solid rgba(255, 230, 200, 0.6);
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 40px rgba(140, 70, 35, 0.18);
+    }
+
+    .hero-card {
+      background: rgba(255, 248, 240, 0.9);
+      text-align: center;
+      padding: 3rem 2.8rem 2.6rem;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.6rem;
+      background: linear-gradient(135deg, #b4562a, #d47a4a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: #6f5240;
+      max-width: 680px;
+      margin: 0 auto 0.8rem auto;
+    }
+
+    .hero-note {
+      font-size: 0.95rem;
+      color: #806350;
+      background: rgba(245, 205, 170, 0.25);
+      padding: 0.4rem 1rem;
+      border-radius: 60px;
+      display: inline-block;
+      backdrop-filter: blur(2px);
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .section-card {
+      padding: 1.8rem 2rem;
+    }
+
+    .section-card h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #9a5f3a;
+      margin-bottom: 1rem;
+      border-left: 5px solid #d47a4a;
+      padding-left: 1rem;
+    }
+
+    .section-card p {
+      margin-bottom: 1.1rem;
+      color: #3e2f27;
+    }
+
+    .section-card ul {
+      list-style: none;
+      margin: 0.8rem 0 0.2rem 0;
+    }
+
+    .section-card li {
+      position: relative;
+      padding-left: 1.6rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.98rem;
+    }
+
+    .section-card li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #d47a4a;
+      font-weight: bold;
+    }
+
+    .link-highlight {
+      color: #b4562a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid rgba(180, 86, 42, 0.3);
+      transition: border-color 0.2s, color 0.2s;
+      padding: 0 0.1rem;
+    }
+
+    .link-highlight:hover {
+      border-bottom-color: #b4562a;
+      color: #803f1f;
+    }
+
+    .button-link {
+      display: inline-block;
+      background: #d47a4a;
+      color: #fff3ea;
+      font-weight: 500;
+      padding: 0.6rem 1.8rem;
+      border-radius: 60px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 10px rgba(200, 100, 50, 0.25);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      margin-top: 0.4rem;
+      border: none;
+      cursor: default;
+      pointer-events: none;  /* 仅作为视觉按钮，实际链接在段落内 */
+    }
+
+    .button-link:hover {
+      background: #b45f32;
+      transform: scale(0.98);
+      box-shadow: 0 2px 6px rgba(170, 80, 35, 0.2);
+    }
+
+    .faq-item {
+      margin-bottom: 1.1rem;
+    }
+
+    .faq-question {
+      font-weight: 500;
+      color: #6f4f38;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .faq-answer {
+      font-size: 0.95rem;
+      color: #4d3b30;
+      padding-left: 1.2rem;
+      border-left: 2px solid #edc8aa;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #7a5d4a;
+      border-top: 1px solid rgba(150, 100, 70, 0.2);
+      padding-top: 1.5rem;
+      margin-top: 0.4rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1.2rem 0.8rem;
+      }
+      .card {
+        padding: 1.5rem 1.2rem;
+        border-radius: 28px;
+      }
+      .hero-card {
+        padding: 2rem 1.2rem;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .grid-cards {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .section-card {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 主视觉 Hero -->
+    <div class="card hero-card">
+      <div class="hero-title">雷速</div>
+      <p class="hero-sub">信息聚合 · 持续关注的起点</p>
+      <span class="hero-note">✦ 再次访问，总有不同的收获</span>
+    </div>
+
+    <!-- 用途卡片 + 适合人群 (网格) -->
+    <div class="grid-cards">
+      <!-- 用途卡片 -->
+      <div class="card section-card">
+        <h2>常见使用场景</h2>
+        <p>无论是日常浏览、主题调研还是兴趣追踪，<a href="https://leisu-people.com" class="link-highlight">雷速</a> 提供了一种轻量而持续的信息收拢方式。每次回访都可能遇见新的内容碎片，适合那些愿意保持开放获取习惯的使用者。</p>
+        <ul>
+          <li>把有价值的页面保留下来，形成个人浏览坐标</li>
+          <li>周期性回顾，观察同一主题下的内容演变</li>
+          <li>与收藏夹互补——不是堆叠，而是有节奏地再访问</li>
+        </ul>
+        <!-- 装饰性按钮（无链接） -->
+        <span class="button-link">保持关注</span>
+      </div>
+
+      <!-- 适合人群 -->
+      <div class="card section-card">
+        <h2>适合哪些人</h2>
+        <p>更适合对信息有整理习惯、不追求一次性读完所有内容的使用者。如果你认同“好的资源值得反复回来”，那么 <a href="https://leisu-people.com" class="link-highlight">雷速</a> 提供的节奏可能恰好匹配你的浏览风格。</p>
+        <ul>
+          <li>经常需要回溯参考资料的创作者</li>
+          <li>喜欢把分散信息逐渐汇聚成知识地图的人</li>
+          <li>愿意给内容第二次、第三次机会的读者</li>
+        </ul>
+        <p style="margin-top: 0.6rem;">它不是快消式的信息流，更像一个安静的侧廊，等你再次步入。</p>
+      </div>
+    </div>
+
+    <!-- 自然链接段落 + 再访问理念 -->
+    <div class="card section-card">
+      <h2>收藏之后呢？</h2>
+      <p>很多资源在被收藏之后就再未打开过。<a href="https://leisu-people.com" class="link-highlight">雷速</a> 鼓励的是另一种习惯：把浏览视为一个持续过程，而非一次性动作。当你再次回到同一个页面，可能会注意到之前忽略的细节，或者发现内容有了更新——这正是反复访问的价值所在。</p>
+      <p>把 <a href="https://leisu-people.com" class="link-highlight">雷速</a> 放在书签栏的某个位置，偶尔点开，像翻看一本常读常新的笔记。不需要刻意规划时间，也不需要背负“必须看完”的压力。</p>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <div class="card section-card">
+      <h2>一些常见疑问</h2>
+      <div class="faq-item">
+        <span class="faq-question">❖ 雷速和一般导航站有什么不同？</span>
+        <div class="faq-answer">侧重点不在于“一次性到达”，而是鼓励回访与持续关注。内容结构更偏向长期主义，不追求短期点击。</div>
+      </div>
+      <div class="faq-item">
+        <span class="faq-question">❖ 适合移动端使用吗？</span>
+        <div class="faq-answer">页面适配移动端浏览，卡片布局在手机上依然清晰可读，适合随时打开回顾。</div>
+      </div>
+      <div class="faq-item">
+        <span class="faq-question">❖ 如何开始？</span>
+        <div class="faq-answer">直接通过 <a href="https://leisu-people.com" class="link-highlight">雷速</a> 进入，不需要注册或安装。把它加入书签，之后每次回访都自然发生。</div>
+      </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer-note">
+      信息卡片 · 适合反复阅读的位置
+    </div>
+
+  </div>
+</body>
+</html>
